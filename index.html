@@ -3,391 +3,322 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love Journey 💕</title>
+    <title>I'm So Sorry 💔</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             overflow: hidden;
             position: relative;
         }
-
-        /* Page Navigation with Pure CSS */
-        .page-container {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-        }
-
-        .page {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            transform: translateX(100%);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        /* Active page */
-        .page.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* Previous page slides left */
-        .page.prev {
-            transform: translateX(-100%);
-        }
-
-        /* ================= APOLOGY PAGE ================= */
-        #apology-page {
-            background: linear-gradient(-45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
-            background-size: 400% 400%;
-            animation: gradientShift1 15s ease infinite;
-            z-index: 2;
-        }
-
-        @keyframes gradientShift1 {
+        
+        @keyframes gradientShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-
-        /* Apology floating hearts - Pure CSS */
+        
+        /* Floating hearts */
         .hearts {
             position: absolute;
             width: 100%;
             height: 100%;
-            overflow: hidden;
             pointer-events: none;
+            z-index: 1;
         }
-
-        .heart1 { position: absolute; left: 10%; animation: float1 8s infinite linear; }
-        .heart2 { position: absolute; left: 25%; animation: float2 10s infinite linear 1s; }
-        .heart3 { position: absolute; left: 45%; animation: float3 7s infinite linear 2s; }
-        .heart4 { position: absolute; left: 70%; animation: float4 9s infinite linear 3s; }
-        .heart5 { position: absolute; left: 85%; animation: float5 11s infinite linear 4s; }
-
-        @keyframes float1 {
-            0% { top: 100%; opacity: 1; transform: rotate(0deg) scale(1); }
-            100% { top: -10%; opacity: 0; transform: rotate(360deg) scale(0.5); }
-        }
-        @keyframes float2 { animation-delay: 1s; animation-duration: 10s; }
-        @keyframes float3 { animation-delay: 2s; animation-duration: 7s; }
-        @keyframes float4 { animation-delay: 3s; animation-duration: 9s; }
-        @keyframes float5 { animation-delay: 4s; animation-duration: 11s; }
-
-        .sparkle1, .sparkle2, .sparkle3, .sparkle4 {
+        
+        .heart {
             position: absolute;
-            width: 6px;
-            height: 6px;
-            background: rgba(255,255,255,0.8);
-            border-radius: 50%;
-            animation: sparkle 3s infinite ease-in-out;
+            color: #ff6b9d;
+            font-size: 20px;
+            animation: float 6s ease-in-out infinite;
         }
-        .sparkle1 { top: 20%; left: 20%; animation-delay: 0s; }
-        .sparkle2 { top: 60%; left: 80%; animation-delay: 1s; }
-        .sparkle3 { top: 80%; left: 30%; animation-delay: 2s; }
-        .sparkle4 { top: 30%; left: 70%; animation-delay: 0.5s; }
-
-        @keyframes sparkle {
-            0%, 100% { transform: scale(0); opacity: 0; }
-            50% { transform: scale(1.5); opacity: 1; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
         }
-
-        .apology-container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.15);
+        
+        /* Main container */
+        .sorry-container {
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border-radius: 30px;
-            padding: 60px 40px;
-            box-shadow: 0 25px 45px rgba(0,0,0,0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 50px;
             max-width: 600px;
-            margin: 20px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
             position: relative;
             z-index: 10;
-            animation: pulse 3s infinite;
+            animation: slideIn 1s ease-out;
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
-
-        .heart-icon {
-            font-size: 80px;
-            color: #ff6b6b;
-            margin-bottom: 20px;
-            animation: heartbeat 1.5s infinite;
-        }
-
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            14% { transform: scale(1.3); }
-            28% { transform: scale(1); }
-            42% { transform: scale(1.3); }
-            70% { transform: scale(1); }
-        }
-
-        .sorry-text {
+        
+        .sorry-title {
             font-family: 'Dancing Script', cursive;
-            font-size: 48px;
+            font-size: 4rem;
             font-weight: 700;
-            color: #fff;
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            animation: glow 2s infinite alternate;
+            animation: glow 2s ease-in-out infinite alternate;
+            text-shadow: 0 0 30px rgba(255, 107, 107, 0.5);
         }
-
+        
         @keyframes glow {
-            from { text-shadow: 0 0 20px #fff, 0 0 30px #ff6b6b; }
-            to { text-shadow: 0 0 30px #fff, 0 0 40px #ff9ff3; }
+            from { filter: drop-shadow(0 0 20px #ff6b6b); }
+            to { filter: drop-shadow(0 0 30px #feca57); }
         }
-
-        .message {
-            font-size: 20px;
-            color: #fff;
-            line-height: 1.6;
-            margin-bottom: 30px;
-            opacity: 0.95;
-        }
-
-        .signature {
-            font-size: 24px;
-            font-weight: 600;
-            color: #fff;
-            margin-bottom: 30px;
+        
+        .emoji {
+            font-size: 3rem;
+            margin: 20px 0;
             animation: bounce 2s infinite;
         }
-
+        
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
             40% { transform: translateY(-10px); }
             60% { transform: translateY(-5px); }
         }
-
-        /* ================= GOOD MORNING PAGE ================= */
-        #goodmorning-page {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            z-index: 1;
+        
+        .sorry-message {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 30px;
+            animation: fadeInUp 1.5s ease-out 0.5s both;
         }
-
-        #goodmorning-page::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(120,119,198,0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%);
-            animation: gradientShift2 20s ease-in-out infinite;
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-
-        @keyframes gradientShift2 {
-            0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(180deg); }
-        }
-
-        /* Good morning particles - Pure CSS */
-        .particles div {
-            position: absolute;
-            background: rgba(255,255,255,0.6);
-            border-radius: 50%;
-            animation: floatParticle 6s ease-in-out infinite;
-        }
-        .particles div:nth-child(1) { width: 8px; height: 8px; left: 10%; animation-delay: 0s; }
-        .particles div:nth-child(2) { width: 12px; height: 12px; left: 30%; animation-delay: 1.5s; }
-        .particles div:nth-child(3) { width: 6px; height: 6px; left: 60%; animation-delay: 3s; }
-        .particles div:nth-child(4) { width: 10px; height: 10px; left: 80%; animation-delay: 0.5s; }
-
-        @keyframes floatParticle {
-            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
-            50% { transform: translateY(-25px) rotate(180deg); opacity: 1; }
-        }
-
-        .gm-container {
-            text-align: center;
-            z-index: 10;
-            position: relative;
-        }
-
-        .sun {
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(45deg, #FFD700, #FFA500, #FF8C00);
-            border-radius: 50%;
-            margin: 0 auto 30px;
-            box-shadow: 0 0 40px rgba(255,215,0,0.6);
-            animation: sunrise 3s ease-out infinite alternate;
-        }
-
-        @keyframes sunrise {
-            0% { transform: scale(0.9) translateY(8px); }
-            100% { transform: scale(1.1) translateY(-2px); }
-        }
-
-        .gm-title {
-            font-size: 4rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, #fff, rgba(255,255,255,0.8));
+        
+        .highlight {
+            background: linear-gradient(120deg, #ff6b6b, #feca57);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            animation: glow2 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes glow2 {
-            from { filter: drop-shadow(0 0 10px rgba(255,255,255,0.5)); }
-            to { filter: drop-shadow(0 0 20px rgba(255,255,255,0.8)); }
-        }
-
-        .gm-subtitle {
-            font-size: 1.5rem;
-            color: rgba(255,255,255,0.9);
-            font-weight: 300;
-            margin-bottom: 40px;
-        }
-
-        /* Pure CSS Navigation Buttons */
-        .nav-btn {
-            display: inline-block;
-            padding: 15px 35px;
-            font-size: 1.1rem;
+            background-clip: text;
             font-weight: 600;
-            color: #fff;
-            text-decoration: none;
+        }
+        
+        .promise-section {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(254, 202, 87, 0.1));
+            border-radius: 20px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 5px solid #ff6b6b;
+            animation: fadeInUp 1.5s ease-out 1s both;
+        }
+        
+        .promise-title {
+            font-size: 1.5rem;
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .btn-forgive {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
             border-radius: 50px;
-            border: 2px solid rgba(255,255,255,0.3);
-            margin: 10px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
             cursor: pointer;
-            backdrop-filter: blur(10px);
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+            animation: pulse 2s infinite;
+            margin-top: 20px;
         }
-
-        .apology-next-btn {
-            background: rgba(72,219,251,0.3);
-            font-size: 1rem;
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4); }
+            50% { box-shadow: 0 10px 40px rgba(255, 107, 107, 0.6); }
+            100% { box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4); }
         }
-
-        .apology-next-btn:hover {
-            background: rgba(72,219,251,0.6);
+        
+        .btn-forgive:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(72,219,251,0.4);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
         }
-
-        .gm-back-btn {
-            background: rgba(255,107,107,0.4);
+        
+        .sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
         }
-
-        .gm-back-btn:hover {
-            background: rgba(255,107,107,0.7);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255,107,107,0.5);
+        
+        .sparkle {
+            position: absolute;
+            color: #ffd700;
+            font-size: 20px;
+            animation: sparkleAnim 2s linear infinite;
         }
-
-        .gm-start-btn {
-            background: linear-gradient(45deg, #FFD700, #FFA500);
-            color: #333 !important;
-            font-weight: 700;
-            border-color: rgba(255,215,0,0.5);
+        
+        @keyframes sparkleAnim {
+            0% { transform: scale(0) rotate(0deg); opacity: 1; }
+            50% { opacity: 1; }
+            100% { transform: scale(1) rotate(180deg); opacity: 0; }
         }
-
-        .gm-start-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(255,215,0,0.5);
-        }
-
-        /* Checkbox Hack for Page Navigation */
-        #page-toggle:checked ~ .page-container #goodmorning-page {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        #page-toggle:checked ~ .page-container #apology-page {
-            opacity: 0;
-            transform: translateX(-100%);
-        }
-
-        /* Responsive */
+        
         @media (max-width: 768px) {
-            .sorry-text, .gm-title { font-size: 2.5rem; }
-            .apology-container { padding: 40px 20px; }
-            .message, .gm-subtitle { font-size: 1.2rem; }
-            .nav-btn { display: block; margin: 15px auto; padding: 12px 25px; }
+            .sorry-container {
+                margin: 20px;
+                padding: 30px 20px;
+            }
+            
+            .sorry-title {
+                font-size: 2.5rem;
+            }
+            
+            .emoji {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Pure CSS Page Toggle -->
-    <input type="checkbox" id="page-toggle" style="display: none;">
-
-    <div class="page-container">
-        <!-- APOLOGY PAGE (Default Active) -->
-        <div id="apology-page" class="page active">
-            <div class="hearts">
-                <div class="heart1">💖</div>
-                <div class="heart2">💕</div>
-                <div class="heart3">💗</div>
-                <div class="heart4">💝</div>
-                <div class="heart5">✨</div>
-            </div>
-            <div class="sparkle1"></div>
-            <div class="sparkle2"></div>
-            <div class="sparkle3"></div>
-            <div class="sparkle4"></div>
-
-            <div class="apology-container">
-                <div class="heart-icon">💖</div>
-                <div class="sorry-text">I'm So Sorry!</div>
-                <p class="message">
-                    I never meant to hurt you.<br>
-                    Your happiness means everything to me.<br>
-                    💕 Please forgive me 💕
-                </p>
-                <div class="signature">With all my love ❤️</div>
-                <label for="page-toggle" class="nav-btn apology-next-btn">
-                    🌅 Tomorrow's Surprise → Good Morning!
-                </label>
-            </div>
+    <div class="hearts" id="hearts"></div>
+    <div class="sparkles" id="sparkles"></div>
+    
+    <div class="sorry-container">
+        <h1 class="sorry-title">I'm So Sorry! 😭💔</h1>
+        <div class="emoji">💝✨</div>
+        
+        <p class="sorry-message">
+            My dearest <span class="highlight">[Name]</span>,<br><br>
+            I want to sincerely apologize from the bottom of my heart for everything I've done to hurt you. 
+            I know I've let you down, and I feel terrible about it. You mean the world to me, and seeing you upset breaks my heart into a million pieces. 😢
+        </p>
+        
+        <div class="promise-section">
+            <div class="promise-title">❤️ My Promises to You ❤️</div>
+            <p style="margin: 10px 0; font-size: 1.1rem;">
+                - I promise to <span class="highlight">listen better</span> and understand your feelings<br>
+                - I promise to <span class="highlight">never repeat this mistake</span> again<br>
+                - I promise to <span class="highlight">make it up to you</span> every single day<br>
+                - I promise to <span class="highlight">cherish and respect you</span> always
+            </p>
         </div>
-
-        <!-- GOOD MORNING PAGE -->
-        <div id="goodmorning-page" class="page">
-            <div class="particles">
-                <div></div><div></div><div></div><div></div>
-            </div>
-
-            <div class="gm-container">
-                <div class="sun"></div>
-                <h1 class="gm-title">Good Morning! 🌅</h1>
-                <p class="gm-subtitle">Rise and shine, beautiful soul!</p>
-                
-                <div>
-                    <label for="page-toggle" class="nav-btn gm-back-btn">
-                        💖 Back to My Apology
-                    </label>
-                    <br>
-                    <a href="#" class="nav-btn gm-start-btn" onclick="alert('🌟 Have a wonderful day! I love you! 💕'); return false;">
-                        ✨ Start Your Amazing Day!
-                    </a>
-                </div>
-            </div>
+        
+        <p class="sorry-message">
+            Please find it in your beautiful heart to forgive me. I love you more than words can express, 
+            and I'll spend every moment proving it to you. You're my everything, my sunshine, my whole world. 🌟
+        </p>
+        
+        <div style="font-size: 1.5rem; margin: 20px 0; font-weight: 600; color: #ff6b6b;">
+            Will you forgive me? 🥺🙏
         </div>
+        
+        <button class="btn-forgive" onclick="forgiveMe()">
+            💕 Yes, I Forgive You! 💕
+        </button>
     </div>
+
+    <script>
+        // Create floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '💖';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            document.getElementById('hearts').appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
+        }
+        
+        // Create sparkles
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.innerHTML = '✨';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.animationDelay = Math.random() * 2 + 's';
+            document.getElementById('sparkles').appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 2000);
+        }
+        
+        // Forgive button effects
+        function forgiveMe() {
+            // Create explosion of hearts
+            for(let i = 0; i < 30; i++) {
+                setTimeout(() => createHeart(), i * 100);
+            }
+            
+            // Success message
+            const btn = document.querySelector('.btn-forgive');
+            btn.innerHTML = '🎉 THANK YOU! I LOVE YOU! 🎉';
+            btn.style.background = 'linear-gradient(45deg, #48dbfb, #ff9ff3)';
+            
+            // Confetti effect
+            confettiEffect();
+        }
+        
+        function confettiEffect() {
+            for(let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    createSparkle();
+                    createHeart();
+                }, i * 50);
+            }
+        }
+        
+        // Initialize effects
+        setInterval(createHeart, 800);
+        setInterval(createSparkle, 1500);
+        
+        // Initial sparkle burst
+        setTimeout(() => {
+            for(let i = 0; i < 20; i++) {
+                setTimeout(createSparkle, i * 100);
+            }
+        }, 1000);
+    </script>
 </body>
 </html>
