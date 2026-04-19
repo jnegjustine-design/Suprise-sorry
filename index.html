@@ -3,33 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Goodmorning Baby!</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>I'm Sorry</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(-45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating hearts */
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 20px;
+            animation: float 6s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Sparkle effect */
+        .sparkles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: sparkle 2s infinite ease-in-out;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { 
+                transform: scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1) rotate(180deg);
+                opacity: 1;
+            }
+        }
+
+        /* Main container */
+        .apology-container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 60px 40px;
+            box-shadow: 0 25px 45px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 600px;
+            z-index: 10;
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .heart-icon {
+            font-size: 80px;
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.3); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.3); }
+            70% { transform: scale(1); }
+        }
+
+        .sorry-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 48px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 20px #fff, 0 0 30px #ff6b6b, 0 0 40px #ff6b6b; }
+            to { text-shadow: 0 0 10px #fff, 0 0 20px #ff9ff3, 0 0 30px #ff9ff3; }
+        }
+
+        .message {
+            font-size: 20px;
+            color: #fff;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .signature {
+            font-size: 24px;
+            font-weight: 600;
+            color: #fff;
+            margin-top: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .apology-container {
+                padding: 40px 20px;
+                margin: 20px;
+            }
+            
+            .sorry-text {
+                font-size: 36px;
+            }
+            
+            .message {
+                font-size: 18px;
+            }
+        }
+
+        /* Hover effect */
+        .apology-container:hover {
+            transform: translateY(-10px);
+            transition: transform 0.3s ease;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Im sorry po, My Baby!</h1>
-        <div class="heart">❤️</div>
-        <p>Click the button below for a special surprise...</p>
-        <button id="surprise-btn">Reveal Surprise</button>
-        <div id="surprise" class="hidden">
-            <p>,<br>
-            Hi baby <br>
-            Welcome sa Buhay ko po and honestly nakakagulat tlga na unexpected dumating ka sa buhay ko super thankful ako and I'm sorry po if hindi lagi ka nalang po nagagalet saken, lagi ka pong naiinis sa kilos ko, Especially ngayun dadag ko po ito ngayung araw na ito sorry po nag antay ka saken sa mga sinabi ko po nung nakaraan idadag ko toh kasi kalasanan toh and to be honest may plano na ako gumawa nito madaling araw palang bibigay ko dapat sayo po eh di pa tapos hirap po kasi ih <br>
-           <br>
-                So ngayun pag di kita po nasatify sa ginawa ko makikipag hiwalay ka saken. wag naman po baby ko wag naman padalos dalos po di ko po kayang mawala nag babago naman po ako para sayo ih alam mo naman po yan nakikita mo po sinusubukan ko naman po,<br>
-            <br>
-            Babi ko ngayun po inaamin ko nagkaroon ako pagkukulang pag dating sa relationship naten and this chance na binigay mo saken is inaayos ko naman po if pagbibigyan mo ko pa ako chance<br>
-            Kasi kung wala ka nang chance na ibibigay saken alam ko po malulungkot ka and malulungkot din ako po and hop8ng magkaroon pa ako chance.<br>
-            Baby ko ayaw kong mawala ka po mahal na mahal po kita 😍😍 and alam mo naman po na ayaw kitang mawala and thank you po tlga sa lahat nang ginagawa mo po para saken I appreciated po yung mga yun po.<br>
-            <br>
-            <br>
-                PS: Wag mo ko hiwalayan po Im sorry po Bati na tayo po baby ko, I love you!</p> 
-            
-            <img src="Iloveyouu.jpg" alt="Us together" style="max-width: 100%; height: auto;">
-            <a href="suprise.html">Magic Click to view</a>
-        </div>
+    <div class="hearts" id="hearts"></div>
+    <div class="sparkles" id="sparkles"></div>
+    
+    <div class="apology-container">
+        <div class="heart-icon">💖</div>
+        <div class="sorry-text">I'm So Sorry!</div>
+        <p class="message">
+            I never meant to hurt you. 
+            <br>Your happiness means everything to me.
+            <br>💕 Please forgive me 💕
+        </p>
+        <div class="signature">With all my love ❤️</div>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        // Create floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = ['💖', '💕', '💗', '💝', '✨'][Math.floor(Math.random() * 5)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
+            document.getElementById('hearts').appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
+        }
+
+        // Create sparkles
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.animationDelay = Math.random() * 2 + 's';
+            document.getElementById('sparkles').appendChild(sparkle);
+
+            setTimeout(() => {
+                sparkle.remove();
+            }, 2000);
+        }
+
+        // Generate hearts continuously
+        setInterval(createHeart, 300);
+
+        // Generate sparkles
+        setInterval(createSparkle, 200);
+    </script>
 </body>
 </html>
