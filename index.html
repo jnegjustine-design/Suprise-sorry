@@ -18,41 +18,91 @@
             height: 100vh;
             overflow: hidden;
             position: relative;
-            transition: all 0.8s ease;
-            opacity: 0;
         }
 
-        /* Page containers - hidden by default */
+        /* Page Navigation with Pure CSS */
+        .page-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+
         .page {
             position: absolute;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             opacity: 0;
-            transform: scale(0.9);
+            transform: translateX(100%);
             transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
+        /* Active page */
         .page.active {
             opacity: 1;
-            transform: scale(1);
+            transform: translateX(0);
+        }
+
+        /* Previous page slides left */
+        .page.prev {
+            transform: translateX(-100%);
         }
 
         /* ================= APOLOGY PAGE ================= */
         #apology-page {
             background: linear-gradient(-45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
             background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
+            animation: gradientShift1 15s ease infinite;
+            z-index: 2;
         }
 
-        @keyframes gradientShift {
+        @keyframes gradientShift1 {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
+        }
+
+        /* Apology floating hearts - Pure CSS */
+        .hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .heart1 { position: absolute; left: 10%; animation: float1 8s infinite linear; }
+        .heart2 { position: absolute; left: 25%; animation: float2 10s infinite linear 1s; }
+        .heart3 { position: absolute; left: 45%; animation: float3 7s infinite linear 2s; }
+        .heart4 { position: absolute; left: 70%; animation: float4 9s infinite linear 3s; }
+        .heart5 { position: absolute; left: 85%; animation: float5 11s infinite linear 4s; }
+
+        @keyframes float1 {
+            0% { top: 100%; opacity: 1; transform: rotate(0deg) scale(1); }
+            100% { top: -10%; opacity: 0; transform: rotate(360deg) scale(0.5); }
+        }
+        @keyframes float2 { animation-delay: 1s; animation-duration: 10s; }
+        @keyframes float3 { animation-delay: 2s; animation-duration: 7s; }
+        @keyframes float4 { animation-delay: 3s; animation-duration: 9s; }
+        @keyframes float5 { animation-delay: 4s; animation-duration: 11s; }
+
+        .sparkle1, .sparkle2, .sparkle3, .sparkle4 {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 50%;
+            animation: sparkle 3s infinite ease-in-out;
+        }
+        .sparkle1 { top: 20%; left: 20%; animation-delay: 0s; }
+        .sparkle2 { top: 60%; left: 80%; animation-delay: 1s; }
+        .sparkle3 { top: 80%; left: 30%; animation-delay: 2s; }
+        .sparkle4 { top: 30%; left: 70%; animation-delay: 0.5s; }
+
+        @keyframes sparkle {
+            0%, 100% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.5); opacity: 1; }
         }
 
         .apology-container {
@@ -64,8 +114,10 @@
             box-shadow: 0 25px 45px rgba(0,0,0,0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             max-width: 600px;
-            animation: pulse 3s infinite;
+            margin: 20px;
+            position: relative;
             z-index: 10;
+            animation: pulse 3s infinite;
         }
 
         @keyframes pulse {
@@ -73,42 +125,13 @@
             50% { transform: scale(1.05); }
         }
 
-        /* Apology effects */
-        .hearts, .sparkles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
+        .heart-icon {
+            font-size: 80px;
+            color: #ff6b6b;
+            margin-bottom: 20px;
+            animation: heartbeat 1.5s infinite;
         }
 
-        .heart {
-            position: absolute;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 20px;
-            animation: float 6s infinite linear;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
-        }
-
-        .sparkle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
-            animation: sparkleAnim 2s infinite ease-in-out;
-        }
-
-        @keyframes sparkleAnim {
-            0%, 100% { transform: scale(0) rotate(0deg); opacity: 0; }
-            50% { transform: scale(1) rotate(180deg); opacity: 1; }
-        }
-
-        .heart-icon { font-size: 80px; color: #ff6b6b; margin-bottom: 20px; animation: heartbeat 1.5s infinite; }
         @keyframes heartbeat {
             0% { transform: scale(1); }
             14% { transform: scale(1.3); }
@@ -128,12 +151,26 @@
         }
 
         @keyframes glow {
-            from { text-shadow: 0 0 20px #fff, 0 0 30px #ff6b6b, 0 0 40px #ff6b6b; }
-            to { text-shadow: 0 0 10px #fff, 0 0 20px #ff9ff3, 0 0 30px #ff9ff3; }
+            from { text-shadow: 0 0 20px #fff, 0 0 30px #ff6b6b; }
+            to { text-shadow: 0 0 30px #fff, 0 0 40px #ff9ff3; }
         }
 
-        .message { font-size: 20px; color: #fff; line-height: 1.6; margin-bottom: 30px; opacity: 0.95; }
-        .signature { font-size: 24px; font-weight: 600; color: #fff; margin-top: 20px; animation: bounce 2s infinite; }
+        .message {
+            font-size: 20px;
+            color: #fff;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .signature {
+            font-size: 24px;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 30px;
+            animation: bounce 2s infinite;
+        }
+
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
             40% { transform: translateY(-10px); }
@@ -143,6 +180,7 @@
         /* ================= GOOD MORNING PAGE ================= */
         #goodmorning-page {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            z-index: 1;
         }
 
         #goodmorning-page::before {
@@ -153,16 +191,31 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
-            animation: gradientShift2 15s ease-in-out infinite;
-            z-index: 1;
+                radial-gradient(circle at 20% 80%, rgba(120,119,198,0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            animation: gradientShift2 20s ease-in-out infinite;
         }
 
         @keyframes gradientShift2 {
             0%, 100% { transform: rotate(0deg); }
             50% { transform: rotate(180deg); }
+        }
+
+        /* Good morning particles - Pure CSS */
+        .particles div {
+            position: absolute;
+            background: rgba(255,255,255,0.6);
+            border-radius: 50%;
+            animation: floatParticle 6s ease-in-out infinite;
+        }
+        .particles div:nth-child(1) { width: 8px; height: 8px; left: 10%; animation-delay: 0s; }
+        .particles div:nth-child(2) { width: 12px; height: 12px; left: 30%; animation-delay: 1.5s; }
+        .particles div:nth-child(3) { width: 6px; height: 6px; left: 60%; animation-delay: 3s; }
+        .particles div:nth-child(4) { width: 10px; height: 10px; left: 80%; animation-delay: 0.5s; }
+
+        @keyframes floatParticle {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+            50% { transform: translateY(-25px) rotate(180deg); opacity: 1; }
         }
 
         .gm-container {
@@ -177,217 +230,164 @@
             background: linear-gradient(45deg, #FFD700, #FFA500, #FF8C00);
             border-radius: 50%;
             margin: 0 auto 30px;
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 40px rgba(255,215,0,0.6);
             animation: sunrise 3s ease-out infinite alternate;
         }
 
         @keyframes sunrise {
-            0% { transform: scale(0.8) translateY(10px); box-shadow: 0 0 30px rgba(255, 215, 0, 0.4); }
-            100% { transform: scale(1) translateY(0); box-shadow: 0 0 50px rgba(255, 215, 0, 0.8); }
+            0% { transform: scale(0.9) translateY(8px); }
+            100% { transform: scale(1.1) translateY(-2px); }
         }
 
         .gm-title {
             font-size: 4rem;
             font-weight: 700;
-            background: linear-gradient(45deg, #fff, rgba(255, 255, 255, 0.8));
+            background: linear-gradient(45deg, #fff, rgba(255,255,255,0.8));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
             margin-bottom: 20px;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             animation: glow2 2s ease-in-out infinite alternate;
         }
 
         @keyframes glow2 {
-            from { filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5)); }
-            to { filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8)); }
+            from { filter: drop-shadow(0 0 10px rgba(255,255,255,0.5)); }
+            to { filter: drop-shadow(0 0 20px rgba(255,255,255,0.8)); }
         }
 
-        .gm-subtitle { font-size: 1.5rem; color: rgba(255, 255, 255, 0.9); font-weight: 300; margin-bottom: 40px; }
+        .gm-subtitle {
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.9);
+            font-weight: 300;
+            margin-bottom: 40px;
+        }
 
-        /* Navigation Buttons */
+        /* Pure CSS Navigation Buttons */
         .nav-btn {
-            padding: 15px 40px;
-            font-size: 1.2rem;
+            display: inline-block;
+            padding: 15px 35px;
+            font-size: 1.1rem;
             font-weight: 600;
             color: #fff;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
             text-decoration: none;
-            display: inline-block;
+            border-radius: 50px;
+            border: 2px solid rgba(255,255,255,0.3);
             margin: 10px;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-        }
-
-        .apology-next-btn {
-            background: linear-gradient(45deg, #48dbfb, #ff9ff3);
-            border: 2px solid rgba(255,255,255,0.3);
+            cursor: pointer;
             backdrop-filter: blur(10px);
         }
 
+        .apology-next-btn {
+            background: rgba(72,219,251,0.3);
+            font-size: 1rem;
+        }
+
         .apology-next-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(72, 219, 251, 0.4);
+            background: rgba(72,219,251,0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(72,219,251,0.4);
         }
 
         .gm-back-btn {
-            background: linear-gradient(45deg, #ff6b6b, #ff9ff3);
+            background: rgba(255,107,107,0.4);
         }
 
         .gm-back-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+            background: rgba(255,107,107,0.7);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255,107,107,0.5);
         }
 
         .gm-start-btn {
             background: linear-gradient(45deg, #FFD700, #FFA500);
-            color: #333;
+            color: #333 !important;
             font-weight: 700;
+            border-color: rgba(255,215,0,0.5);
         }
 
         .gm-start-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255,215,0,0.5);
+        }
+
+        /* Checkbox Hack for Page Navigation */
+        #page-toggle:checked ~ .page-container #goodmorning-page {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        #page-toggle:checked ~ .page-container #apology-page {
+            opacity: 0;
+            transform: translateX(-100%);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
             .sorry-text, .gm-title { font-size: 2.5rem; }
-            .apology-container { padding: 40px 20px; margin: 20px; }
+            .apology-container { padding: 40px 20px; }
             .message, .gm-subtitle { font-size: 1.2rem; }
-            .nav-btn { padding: 12px 25px; font-size: 1rem; display: block; margin: 10px auto; }
+            .nav-btn { display: block; margin: 15px auto; padding: 12px 25px; }
         }
     </style>
 </head>
 <body>
-    <!-- APOLOGY PAGE -->
-    <div id="apology-page" class="page active">
-        <div class="hearts" id="hearts"></div>
-        <div class="sparkles" id="sparkles"></div>
-        
-        <div class="apology-container">
-            <div class="heart-icon">💖</div>
-            <div class="sorry-text">I'm So Sorry!</div>
-            <p class="message">
-                I never meant to hurt you. 
-                <br>Your happiness means everything to me.
-                <br>💕 Please forgive me 💕
-            </p>
-            <div class="signature">With all my love ❤️</div>
-            <button class="nav-btn apology-next-btn" onclick="goToGoodMorning()">
-                🌅 Tomorrow's Surprise → Good Morning!
-            </button>
-        </div>
-    </div>
+    <!-- Pure CSS Page Toggle -->
+    <input type="checkbox" id="page-toggle" style="display: none;">
 
-    <!-- GOOD MORNING PAGE -->
-    <div id="goodmorning-page" class="page">
-        <div class="particles" id="particles">
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
-            <div class="particle"></div>
+    <div class="page-container">
+        <!-- APOLOGY PAGE (Default Active) -->
+        <div id="apology-page" class="page active">
+            <div class="hearts">
+                <div class="heart1">💖</div>
+                <div class="heart2">💕</div>
+                <div class="heart3">💗</div>
+                <div class="heart4">💝</div>
+                <div class="heart5">✨</div>
+            </div>
+            <div class="sparkle1"></div>
+            <div class="sparkle2"></div>
+            <div class="sparkle3"></div>
+            <div class="sparkle4"></div>
+
+            <div class="apology-container">
+                <div class="heart-icon">💖</div>
+                <div class="sorry-text">I'm So Sorry!</div>
+                <p class="message">
+                    I never meant to hurt you.<br>
+                    Your happiness means everything to me.<br>
+                    💕 Please forgive me 💕
+                </p>
+                <div class="signature">With all my love ❤️</div>
+                <label for="page-toggle" class="nav-btn apology-next-btn">
+                    🌅 Tomorrow's Surprise → Good Morning!
+                </label>
+            </div>
         </div>
 
-        <div class="gm-container">
-            <div class="sun"></div>
-            <h1 class="gm-title">Good Morning! 🌅</h1>
-            <p class="gm-subtitle">Rise and shine, beautiful soul!</p>
-            
-            <div>
-                <button class="nav-btn gm-back-btn" onclick="goToApology()">
-                    💖 Back to My Apology
-                </button>
-                <br>
-                <button class="nav-btn gm-start-btn" onclick="startTheDay()">
-                    ✨ Start Your Amazing Day!
-                </button>
+        <!-- GOOD MORNING PAGE -->
+        <div id="goodmorning-page" class="page">
+            <div class="particles">
+                <div></div><div></div><div></div><div></div>
+            </div>
+
+            <div class="gm-container">
+                <div class="sun"></div>
+                <h1 class="gm-title">Good Morning! 🌅</h1>
+                <p class="gm-subtitle">Rise and shine, beautiful soul!</p>
+                
+                <div>
+                    <label for="page-toggle" class="nav-btn gm-back-btn">
+                        💖 Back to My Apology
+                    </label>
+                    <br>
+                    <a href="#" class="nav-btn gm-start-btn" onclick="alert('🌟 Have a wonderful day! I love you! 💕'); return false;">
+                        ✨ Start Your Amazing Day!
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-
-    <script>
-        // Page navigation
-        function goToApology() {
-            fadeOutPage('goodmorning-page', 'apology-page');
-        }
-
-        function goToGoodMorning() {
-            fadeOutPage('apology-page', 'goodmorning-page');
-        }
-
-        function fadeOutPage(currentPageId, nextPageId) {
-            const currentPage = document.getElementById(currentPageId);
-            const nextPage = document.getElementById(nextPageId);
-            
-            currentPage.classList.remove('active');
-            nextPage.classList.add('active');
-        }
-
-        // Apology page effects
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.className = 'heart';
-            heart.innerHTML = ['💖', '💕', '💗', '💝', '✨'][Math.floor(Math.random() * 5)];
-            heart.style.left = Math.random() * 100 + '%';
-            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
-            heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
-            document.getElementById('hearts').appendChild(heart);
-            setTimeout(() => heart.remove(), 7000);
-        }
-
-        function createSparkle() {
-            const sparkle = document.createElement('div');
-            sparkle.className = 'sparkle';
-            sparkle.style.left = Math.random() * 100 + '%';
-            sparkle.style.top = Math.random() * 100 + '%';
-            sparkle.style.animationDelay = Math.random() * 2 + 's';
-            document.getElementById('sparkles').appendChild(sparkle);
-            setTimeout(() => sparkle.remove(), 2000);
-        }
-
-        // Good morning sparkle
-        function createGMSparkle() {
-            const sparkle = document.createElement('div');
-            sparkle.style.cssText = `
-                position: absolute;
-                width: 4px; height: 4px;
-                background: #FFD700;
-                border-radius: 50%;
-                left: ${Math.random() * 100}vw;
-                top: ${Math.random() * 100}vh;
-                animation: sparkleAnim 1s ease-out forwards;
-                pointer-events: none;
-                z-index: 20;
-            `;
-            document.body.appendChild(sparkle);
-            setTimeout(() => sparkle.remove(), 1000);
-        }
-
-        function startTheDay() {
-            // Celebration effect
-            for(let i = 0; i < 20; i++) {
-                setTimeout(() => createGMSparkle(), i * 100);
-            }
-            setTimeout(() => {
-                alert('🌟 Have the most wonderful day ever! I love you! 💕');
-            }, 500);
-        }
-
-        // Initialize
-        window.addEventListener('load', () => {
-            document.body.style.opacity = '1';
-            
-            // Start effects
-            setInterval(createHeart, 300);
-            setInterval(createSparkle, 200);
-            setInterval(() => document.getElementById('particles').children[0].style.animationDelay = Math.random() * 2 + 's', 2000);
-        });
-    </script>
 </body>
 </html>
